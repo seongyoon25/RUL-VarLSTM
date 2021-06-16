@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import json
+import base64
+import io
 from utils import CallModel
 
 file_path = 'data_example_1.csv' # or 'data_example_2.csv'
@@ -30,5 +32,21 @@ plt.ylim([55, 105])
 plt.xlim([0, 800])
 
 plt.tight_layout()
-plt.savefig('Prediction.tiff', dpi=300, bbox_inches='tight', pad_inches=0)
-plt.close()
+figfile = io.BytesIO()
+plt.savefig(figfile, format='png', bbox_inches='tight', pad_inches=0)
+figfile.seek(0)  # rewind to beginning of file
+figdata_png = base64.b64encode(figfile.read()).decode('utf-8')
+
+pred_path = './predictions.json'
+data = {}
+data['capacity_forecast'] = pred_mc_mean.tolist()
+data['capacity_upperbound'] = pred_mc_upper.tolist()
+data['capacity_lowerbound'] = pred_mc_lower.tolist()
+data['figure_base64'] = figdata_png
+
+with open(pred_path, 'w') as outfile:
+    json.dump(data, outfile)
+
+# Test decoding
+# with open('prediction.png', 'wb') as f:
+#     f.write(base64.b64decode(figdata_png))
