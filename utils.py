@@ -1,3 +1,8 @@
+# utils.py
+# This script contains utility functions to call and evaluate the model.
+# Author: Seongyoon Kim
+# Date: 2023-04-12
+
 import numpy as np
 import pandas as pd
 import torch

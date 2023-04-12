@@ -1,3 +1,8 @@
+# main.py
+# This script reads a data file, evaluates the given model, and outputs the forecasted capacity values and plot as base64 encoded image.
+# Author: Seongyoon Kim
+# Date: 2023-04-12
+
 import numpy as np
 import matplotlib.pyplot as plt
 import json

@@ -1,3 +1,8 @@
+# models.py
+# This script contains the implementation of the VarLSTM model.
+# Author: Seongyoon Kim
+# Date: 2023-04-12
+
 import torch
 import torch.nn as nn
 
